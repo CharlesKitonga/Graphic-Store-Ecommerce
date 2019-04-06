@@ -33,7 +33,7 @@
 		<h4>Already have an Account ?<a href="{{url('login')}}">  Sign In »</a> </h4>
 	</div>
 	<div class="login-body">
-		<form method="POST" id="registerForm" action="{{url('/register')}}" enctype="multipart/form-data" class="wow fadeInUp animated" data-wow-delay=".7s">{{csrf_field()}}
+		<form method="POST" id="registerForm" action="{{url('/register')}}" enctype="multipart/form-data" class="wow fadeInUp animated" data-wow-delay=".7s">{{@csrf_field()}}
 			<input type="text" id="name" name="name" placeholder="Full Name" required="">
 			<input type="text" id="email" name="email" class="email" placeholder="Email Address" required="">
 			<input type="password" id="password"  name="password" class="lock" placeholder="Password">

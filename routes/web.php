@@ -46,8 +46,14 @@ Route::match(['get','post'], '/user-login','UserController@Login');
 Route::group(['middleware'=>['frontLogin']],function(){
 	
 	Route::match(['get','post'], '/account', 'UserController@Account');
+	//check current password
+	Route::post('/check-user-pwd','UserController@CheckUserPwd');
+	//Update current password in db
+	Route::post('/update-user-pwd', 'UserController@updateUserPassword');
 
 });
+//Checkout Page Route
+Route::match(['get','post'], '/checkout','ProductsController@Checkout');
 
 //User's logout
 Route::get('/user-logout','UserController@logout');

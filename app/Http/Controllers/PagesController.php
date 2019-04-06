@@ -90,7 +90,7 @@ class PagesController extends Controller
         }
         $categories = Job::where(['id'=>$id])->first();
         //$categories = json_decode(json_encode($categories));
-        return view('start')->with(compact('categories'));
+        return view('services.start')->with(compact('categories'));
     }
 
     public function Package(){

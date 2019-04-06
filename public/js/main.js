@@ -128,6 +128,63 @@ $().ready(function(){
 			}
 		}
 	});
+	//Check User Current Password
+	$("#current_pwd").keyup(function(){
+		var current_pwd = $(this).val();
+		$.ajax({
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type:'post',
+			url:'/check-user-pwd',
+			data:{current_pwd:current_pwd},
+			success:function(resp){
+				// alert(resp);
+				if(resp == "false") {
+					$("#chkPwd").html("<font color = 'red'>Current Password is Incorrect</font>");
+				}else if (resp == "true") {
+					$("#chkPwd").html("<font color = 'green'>Correct Current Password</font>");
+
+				}
+			},error:function(){
+				alert("Error");
+			}
+		});
+	});
+	//validate new user password
+
+	$("#passwordForm").validate({
+		rules:{
+			current_pwd:{
+				required: true,
+				minlength:6,
+				maxlength:20
+			},
+			new_pwd:{
+				required: true,
+				minlength:6,
+				maxlength:20
+			},
+			confirm_pwd:{
+				required:true,
+				minlength:6,
+				maxlength:20,
+				equalTo:"#new_pwd"
+				
+			}
+
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+
 });
 
 $().ready(function(){

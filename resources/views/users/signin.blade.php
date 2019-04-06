@@ -22,7 +22,7 @@
 			<h4>Welcome back to Graphic Store! <br> Not a Member? <a href="{{url('/register')}}">  Register Now »</a> </h4>
 		</div>
 		<div class="login-body wow fadeInUp animated" data-wow-delay=".7s">
-			<form 	id="loginForm" method="post" name="loginForm" action="{{url('/user-login')}}" enctype="multipart/form-data">{{csrf_field()}}
+			<form 	id="loginForm" method="post" name="loginForm" action="{{url('/user-login')}}" enctype="multipart/form-data">{{@csrf_field()}}
 				<input type="text" class="user" name="email" placeholder="Enter your email" required="">
 				<input type="password" name="password" class="lock" placeholder="Password">
 				<input type="submit" name="Sign In" value="Sign In">

@@ -309,16 +309,6 @@ class ProductsController extends Controller
         return view('single')->with(compact('serviceDetails'));
     }
 
-    public function getProductPrice(Request $request){
-        $data = $request->all();
-        // echo "<pre>";print_r($data);die;
-        $proArr = explode("-",$data['idSize']);
-        $proAttr = Products_Attributes::where(['product_id'=>$proArr[0], 'size'=>$proArr[1]])->first();
-        echo $proAttr->price;
-
-        echo "#";
-        echo $proAttr->stock;
-    }
  
     public function addtocart(Request $request){
         $data = $request->all();
@@ -344,7 +334,7 @@ class ProductsController extends Controller
              DB::table('carts')->insert(['product_id'=>$data['product_id'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
         }
 
-        return redirect('cart')->with('flash_message_success', 'Service has been Added in Cart');
+        return redirect('services.cart')->with('flash_message_success', 'Service has been Added in Cart');
 
     }
     public function cart(){
@@ -355,13 +345,15 @@ class ProductsController extends Controller
             $productDetails = Package::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
+            // Get Cart Total Amount
+            $total_amount = 0;
+            foreach($userCart as $item){
+               $total_amount = $total_amount + ($item->price );
+            }
+
         //echo "<pre>";print_r($userCart);die;
-        return view('cart')->with(compact('userCart'));
+        return view('services.cart')->with(compact('userCart', 'total_amount'));
     } 
-    public function updateCartQuantity($id=null,$quantity=null){
-        DB::table('carts')->where('id',$id)->increment('quantity',$quantity);
-        return redirect('cart')->with('flash_message_success', 'Product Quantity has been Updated Successfully!');   
-    }
 
     public function deleteCart($id = null){
         Cart::where(['id'=>$id])->delete();
@@ -382,4 +374,9 @@ class ProductsController extends Controller
 
         return view('search-results')->with(compact('products'));
     }
+    public function Checkout(){
+        return view('services.checkout');
+    }
+
 }
+

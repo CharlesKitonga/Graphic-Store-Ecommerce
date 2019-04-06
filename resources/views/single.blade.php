@@ -76,35 +76,14 @@
 	</div>
 </div>
 <!--//single-page-->
-<h3 style="margin-right: 650px; " class="hdg">Project Upgrades</h3>
-	<h4 style="margin-right: 650px; font-size: 25px;">You Can Choose to Upgrade Your Project</h4>
-<div style="max-width: 700px; margin-bottom: 500px;" class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
+<h3 style="margin-left: 500px;" class="hdg">Project Upgrades</h3>
+	<h4 style=" margin-left: 450px; font-size: 25px;">You Can Choose to Upgrade Your Project</h4>
+<div style="width: 990px; margin-left: 80px;" class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
 	
 	<div class="well">
 		There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
 	</div>
-	<div class="well">
-		It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here
-	</div>
-	<div class="well">
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-	</div>
 </div>
 
-<div style="margin-left: 800px; margin-top: -1000px;" class="grid_3 grid_5 wow fadeInDown animated" data-wow-delay=".5s">
-<h3 style="margin-left: 40px" class="hdg">Order Summary</h3>
 
-<div style="width: 550px; margin-left:  -50px;" class="col-md-6">
-	
-	<div class="list-group list-group-alternate"> 
-		<a href="#" class="list-group-item"><span class="badge">201</span> <i class="ti ti-email"></i> Inbox </a> 
-		<a href="#" class="list-group-item"><span class="badge badge-primary">5021</span> <i class="ti ti-eye"></i> Profile visits </a> 
-		<a href="#" class="list-group-item"><span class="badge">14</span> <i class="ti ti-headphone-alt"></i> Call </a> 
-		<a href="#" class="list-group-item"><span class="badge">20</span> <i class="ti ti-comments"></i> Messages </a> 
-		<a href="#" class="list-group-item"><span class="badge badge-warning">14</span> <i class="ti ti-bookmark"></i> Bookmarks </a> 
-		<a href="#" class="list-group-item"><span class="badge badge-danger">30</span> <i class="ti ti-bell"></i> Notifications </a> 
-	</div>
-</div>
-<div class="clearfix"> </div>
-</div>
 @endsection
