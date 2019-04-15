@@ -17,6 +17,7 @@ $categories = Controller::categories();
                <li ><a href="{{url('/account')}}"><i class="fa fa-user"></i> Account</a></li>
                <li ><a href="{{url('/user-logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                @endif
+
          </p>
          </div>
          <div class="nav navbar-nav navbar-right social-icons wow fadeInRight animated" data-wow-delay=".5s">
@@ -50,7 +51,7 @@ $categories = Controller::categories();
             <div class="header-right cart">
                <a href="{{url('/cart')}}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                <h4><a href="{{url('/cart')}}">
-                     <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> ({{ Cart::instance('default')->count(false) }})</span>) 
+                     <span >$ {{ Cart::total() }}</span> <span > ({{ Cart::instance('default')->count(false) }})</span> 
                </a></h4>
                <div class="cart-box">
                   <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
@@ -77,29 +78,28 @@ $categories = Controller::categories();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav top-nav-info">
                   <li><a href="{{url('/')}}" class="active">Home</a></li>
-                     
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-                     <ul class="dropdown-menu multi-column multi-column2">
+                  @foreach($mainCategories as $cat)
+                           @if($cat->status=="1")    
+                   <li class="dropdown grid">
+                          
+                           <a href="#" class="dropdown-toggle list1" data-toggle="dropdown">{{$cat->category_name}}<b class="caret"></b></a>
+                         
+                           <ul class="dropdown-menu multi-column multi-column2">
+                              <div class="row">
 
-                     @foreach($mainCategories as $cat)
-                        <div class="row">
-                           <div class="col-sm-4 menu-grids menulist1">
-                              <h4 >{{$cat->category_name}}</h4>
-                              <ol class="multi-column-dropdown ">
-                                 @foreach($cat->categories as $subcat)
-                                 <li><a class="list" href="{{ asset('/products/'.$subcat->url)}}">{{$subcat->category_name}}</a></li>
-                                 @endforeach
-                              </ol>
-                             
-                           </div>                                                      
-                           <div class="clearfix"> </div>
-                        </div>
-                        @endforeach
-                     </ul>
-
+                                 <div class="col-sm-3 menu-grids">
+                                    @foreach($cat->categories as $subcat)
+                                    <ul class="multi-colum-dropdown">
+                                       <li><a class="list" style="color: #322D2D; margin-top: 10px;" href="{{ asset('/subcats/'.$subcat->url)}}">{{$subcat->category_name}}</a></li>
+                                    </ul>
+                                    @endforeach
+                                 </div>                                        
+                                 <div class="clearfix"> </div>
+                              </div>
+                           </ul>
                   </li>
-
+                         @endif
+                 @endforeach
                </ul> 
                <div class="clearfix"> </div>
                <!--//navbar-collapse-->

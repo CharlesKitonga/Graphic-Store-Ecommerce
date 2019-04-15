@@ -56,10 +56,10 @@
 				<h6 class="item_price">${{$service->price}}</h6>			
 				<p>{{$service->designers}}</p>
 				<p>{{$service->revisions}}</p>
-				<p>{{$service->gurantee}}</p>
+				<p>{{$service->guarantee}}</p>
 				<div class="clearfix"> </div>
 				<div class="btn_form">
-					<form name="addtocartForm" id="addtocartForm" action="{{url('/add-to-cart')}}" method="post">
+					<form name="addtocartForm" id="addtocartForm" action="{{route('cart.store')}}" method="post">
 						 {!! csrf_field() !!}
                         <input type="hidden" name="product_id" value="{{ $service->id }}">
                         <input type="hidden" name="designs" value="{{ $service->designs }}">

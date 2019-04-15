@@ -23,25 +23,35 @@
     </div>        
 @endif
 	<!--cart-items-->
+	@if (sizeof(Cart::content()) > 0)
+		<br><br>
+	            <h2 style="margin-left: 100px;">{{ Cart::count() }} item(s) in Shopping Cart</h2>
+
 	<div class="cart-items">
 		<div class="container">
 			<h3 class="wow fadeInUp animated" data-wow-delay=".5s">My Cart</h3>
-			@foreach($userCart as $cart)
+            @foreach(Cart::content() as $cartItem)
 			<div class="cart-header wow fadeInUp animated" data-wow-delay=".5s">
-				<a class="alert-close" href="{{url('/cart/delete_cart/'.$cart->id)}}"></a>
+				
+				<form action="{{ url('cart', [$cartItem->rowId]) }}" method="POST">
+	                {!! csrf_field() !!}
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input  type="submit" class="alert-close" value="Remove">
+	            </form>
 				<div class="cart-sec simpleCart_shelfItem">
 					<div class="cart-item cyc">
-						<a href="single.html"><img src="{{ asset('images/backend_images/products/small/'.$cart->image)}}" class="img-responsive" alt=""></a>
+						<a href="single.html"><img src="{{ asset('images/backend_images/products/small/'.$cartItem->model->image)}}" class="img-responsive" alt=""></a>
 					</div>
 					<div class="cart-item-info">
-						<h4><a href="single.html">{{$cart->designs}}</a></h4>
+						<h2><a href="{{url('/products')}}">{{$cartItem->model->category_name}}</a></h2><br>
+						<h4><a href="{{url('/products')}}">{{$cartItem->designs}}</a></h4>
 						<ul>
-							<p>Designers :{{$cart->designers}}</p>
+							<p>Designers :{{$cartItem->model->designers}}</p>
 						</ul>
 						<div class="delivery">
-							<p style="font-size: 16px; font-family: sans-serif;">Revisions : {{$cart->revisions}}</p>
+							<p style="font-size: 16px; font-family: sans-serif;">Revisions : {{$cartItem->model->revisions}}</p>
 							<br><br><br>
-							<p style=" font-size: 16px;font-family: sans-serif;">Price : $ {{$cart->price}}</p>
+							<p style=" font-size: 16px;font-family: sans-serif;">Price : $ {{$cartItem->price}}</p>
 							<div class="clearfix"></div>
 						</div>	
 					</div>
@@ -49,9 +59,15 @@
 				</div>
 			</div>
 			@endforeach
-		</div>
-			<li style="margin-left: 700px; font-size: 20px; font-weight: bolder;">Grand Total <span>$ <?php echo $total_amount; ?></span></li>
-	</div>
-	<a style="margin-left: 1000px;  font-weight: bolder;font-size: 30px;" href="{{url('/checkout')}}"><span style="margin-top: -300px;" class="label label-primary">Checkout</span></a>
+			<li style="margin-left: 700px; font-size: 20px; font-weight: bolder;">Grand Total <span>$ {{ Cart::total() }}</span></li>
+			<a style="margin-left: 1000px;  font-weight: bolder;font-size: 30px;" href="{{url('/checkout')}}"><span style="margin-top: -300px;" class="label label-primary">Proceed To Checkout</span></a>
 	<!--//cart-items-->	
+	</div>
+			
+	</div>
+	@else
+	<br><br>
+        <h3>You have no Services in your cart</h3><br>
+         <a href="{{url('/')}}" class="btn btn-primary btn-lg">Click Here To Browse for Services</a>
+    @endif
 @endsection

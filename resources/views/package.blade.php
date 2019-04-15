@@ -47,7 +47,7 @@
 <!--//products-->		
 <script>
 function myFunction() {
-  document.getElementById("{{$package->id}}").innerHTML = "Selected";
+  document.getElementById("").innerHTML = "Selected";
 }
 </script>
 <!-- the jScrollPane script -->

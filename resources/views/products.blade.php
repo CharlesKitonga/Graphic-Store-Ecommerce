@@ -18,13 +18,14 @@
 			<p>Select What You Need</p>
 		</div>
 	<div class="col-md-10 product-model-sec">
-		@foreach($jobsdone as $cat)
+		<h4 style="font-size: 40px; color: #CD5C5C;"><span> {{$categoryDetails->category_name}}</span></h4>
+		@foreach($productsAll as $cat)
 		<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".8s"  style="margin-right: 10px; margin-top: 25px;">
 			<div class="new-top">
 				<a href="#"><img src="{{asset('images/backend_images/products/small/'.$cat->image)}}" class="img-responsive" alt=""/></a>
 				<div class="new-text">
 					<ul>
-						<li><a href="{{url('/start/'.$cat->id)}}"> Continue </a></li>
+						<li><a href="{{url('/start/'.$cat->category_name)}}"> Continue </a></li>
 					</ul>
 				</div>
 			</div>
@@ -37,9 +38,7 @@
 					<span class="on">☆</span>
 					<span>☆</span>
 				</div>
-				<div class="ofr">
-					<p><span class="item_price">${{$cat->price}}</span></p>
-				</div>
+				
 			</div>
 		</div>
 		@endforeach

@@ -34,18 +34,19 @@
                 <label class="control-label"><strong >{{$productDetails->product_name}}</strong></label>
               </div>
                  <div class="control-group">
-                <label class="control-label">Product Code</label>
-                <label class="control-label"><strong>{{$productDetails->product_code}}</strong></label>
+                <label class="control-label" >Product Code</label>
+                <label class="control-label" style="margin-left: -100px;"><strong>{{$productDetails->product_code}}</strong></label>
               </div>
               <div class="control-group">
                 <label class="control-label"></label>
                 <div class="field_wrapper">
-                  <div>
-                    <input required="" type="text" name="sku[]" id="sku" placeholder="sku" style="width: 120px"  />
-                    <input required="" type="text" name="color[]" id="color" placeholder="color" style="width: 120px"  />
-                    <input required="" type="text" name="size[]" id="size" placeholder="Size" style="width: 120px"  />
+                  <div style="margin-right: -50px;">
+                    <input required="" type="text" name="designs[]" id="designs" placeholder="Designs" style="width: 120px"  />
+                    <input required="" type="text" name="designers[]" id="designers" placeholder="Designers" style="width: 120px"  />
+                    <input required="" type="text" name="revisions[]" id="revisions" placeholder="Revisions" style="width: 120px"  />
                     <input required="" type="text" name="price[]" id="price" placeholder="Price" style="width: 120px"  />
-                    <input required="" type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px"  />
+                    <input required="" type="text" name="guarantee[]" id="guarantee" placeholder="Guarantee" style="width: 120px"  />
+                    <input required="" type="file" name="image[]" id="image" placeholder="Image" style="width: 120px"  />
 
                     <a href="javascript:void(0);" class="add_button" title="Add field">Add</a>
                   </div>
@@ -55,50 +56,6 @@
                 <input type="submit" value="Add Attributes" class="btn btn-success">
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>View Product Attributes</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <form action="{{url('/admin/edit_attributes/'.$productDetails->id)}}" method="post">
-              {{csrf_field()}}
-                <table class="table table-bordered data-table">
-                  <thead>
-                    <tr>
-                      <th>Attribute ID</th>
-                      <th>SKU</th>
-                      <th>Color</th>
-                      <th>Size</th>
-                      <th>Price</th>
-                      <th>Stock</th>
-                       <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($productDetails['attributes'] as $attribute)
-                    <tr class="gradeX">
-                      <td><input type="hidden" name="idAttr[]" value="{{$attribute->id}}">{{$attribute->id}}</td>
-                      <td>{{$attribute->sku}}</td>
-                      <td>{{$attribute->color}}</td>
-                      <td>{{$attribute->size}}</td>
-                      <td><input type="text" name="price[]" value="{{$attribute->price}}"></td>
-                      <td><input type="text" name="stock[]" value="{{$attribute->stock}}"></td>
-                      <td class="center">
-                          <input type="submit" value="update" class="btn btn-primary btn-mini">
-                          <a rel="{{ $attribute->id }}" rel1="delete_attribute" href ="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
-                      </td>
-                    </tr>   
-                  </div>
-                  @endforeach
-                  </tbody>
-                </table>
-            </form> 
           </div>
         </div>
       </div>

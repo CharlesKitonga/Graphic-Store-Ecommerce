@@ -16,14 +16,19 @@ use App\Contact;
 class IndexController extends Controller
 {
     public function index($id = null){
+                //Show error 404 if category does not exist
+        $countCategory = Category::where(['url'=>$url,'status'=>1])->count();
+        if ($countCategory==0) {
+            abort(404);
+        }
     	//In Ascending Order  (by Default)
-    	$productsAll = Product::get();
+    	$productsAll = Category::get();
 
     	//In Descending Order 
-    	$productsAll = Product::OrderBy('id','DESC')->get();
+    	$productsAll = Category::OrderBy('id','DESC')->get();
 
     	//In Random Order 
-    	$productsAll = Product::inRandomOrder()->get();
+    	$productsAll = Category::inRandomOrder()->get();
 
         //Getting Slider Products In Ascending Order  (by Default)
         $sliderproducts = SliderProducts::get();
@@ -36,10 +41,10 @@ class IndexController extends Controller
 
 
         //Get Product Details
-        $productDetails = Product::where('id',$id)->first();
+        $productDetails = Category::where('id',$id)->first();
         $productDetails = json_decode(json_encode($productDetails));
 
-        $relatedProducts = Product::where('id','!=',$id)->get();
+        $relatedProducts = Category::where('id','!=',$id)->get();
 
     	//Get all categories and subcategories
     	$categories = Category::with('categories')->where(['parent_id'=>0])->get();

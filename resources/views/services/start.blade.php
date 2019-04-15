@@ -17,7 +17,7 @@
 </div>
 <div class="widget-shadow">
 	<div class="login-body">
-		<form class="wow fadeInUp animated" data-wow-delay=".7s" method="post" action="{{url('/start')}}" enctype="multipart/form-data"> {{@csrf_field()}}
+		<form class="wow fadeInUp animated" data-wow-delay=".7s" method="post" action="{{url('/package/'.$categories->category_name)}}" enctype="multipart/form-data"> {{@csrf_field()}}
 			<label>Name of Your Project</label>
 			<input type="text" name="project" placeholder="Name of Your Project" required=""><br>
 			<label>Describe Your Project</label><br>

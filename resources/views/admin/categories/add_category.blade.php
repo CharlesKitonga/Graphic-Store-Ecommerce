@@ -14,7 +14,7 @@
             <h5>Add Category</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{url('/admin/categories/add_category')}}" name="add_category" id="add_category" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="{{url('/admin/categories/add_category')}}" name="add_category" id="add_category" novalidate="novalidate" enctype="multipart/form-data" >
               {{ csrf_field()}}
               <div class="control-group">
                 <label class="control-label">Category Name</label>
@@ -45,7 +45,14 @@
                   <input type="text" name="url" id="url">
                 </div>
               </div>
-               <div class="control-group">
+
+              <div class="control-group">
+                <label class="control-label">Image</label>
+                <div class="controls">
+                  <input type="file" name="image" id="image">
+                </div>
+              </div>
+                <div class="control-group">
                 <label class="control-label">Enable</label>
                 <div class="controls">
                   <input type="checkbox" name="status" id="status" value="1">

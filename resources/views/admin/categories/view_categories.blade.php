@@ -34,6 +34,7 @@
                   <th>Service Name</th>
                   <th>Service Level</th>
                   <th>Service URL</th>
+                  <th>Image</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -44,7 +45,16 @@
                   <td>{{$category->category_name}}</td>
                   <td>{{$category->parent_id}}</td>
                   <td>{{$category->url}}</td>
+                  <td>
+                    @if(!empty($category->image))
+                      <img src="{{ asset('/images/backend_images/products/small/'.$category->image) }}" style="width:60px;">
+                    @endif
+                  </td>
                   <td class="center">
+                    @if($category->parent_id!=0)
+
+                    <a href="{{url('/admin/add_category_attributes/'.$category->category_name)}}" class="btn btn-primary btn-mini" title="Add Packages">Add </a>
+                    @endif
                     <a href="{{url('/admin/edit_category/'.$category->id)}}" class="btn btn-primary btn-mini">Edit</a> 
                     <a <?php /*id="delCat" href="{{url('/admin/delete_category/'.$category->id)}}" */?> rel ="{{$category->id}}" rel1 = "delete_category" href = "javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a></td>
                 </tr>

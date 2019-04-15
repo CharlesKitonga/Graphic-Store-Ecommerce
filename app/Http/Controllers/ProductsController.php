@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Image;
 use Auth;
 use Session;
 use App\Job;
-use App\Cart;
+use App\Start;
 use App\Category;
 use App\Products_Attributes;
 use App\SliderProducts;
@@ -16,6 +17,7 @@ use App\Product;
 use App\Package;
 use App\Products_Images;
 use DB;
+use App\Carts;
 
 class ProductsController extends Controller
 {
@@ -146,6 +148,16 @@ class ProductsController extends Controller
         // echo "<pre>"; print_r($products); die;
         return view('admin.products.view_products')->with(compact('products'));
     }
+    public function viewProductsAttributes(Request $request){
+        $productsattributes = Products_Attributes::get();
+        $productsattributes = json_decode(json_encode($productsattributes));
+        // foreach($products as $key => $val){
+        //     $category_name = Category::where(['id'=>$val->category_id])->first();
+        //     $products[$key]->category_name = $category_name->category_name;
+        // }
+        // echo "<pre>"; print_r($products); die;
+        return view('admin.products.view_products_attributes')->with(compact('productsattributes'));    
+    }
     
     public function deleteProduct($id = null){
         Product::where(['id'=>$id])->delete();
@@ -213,42 +225,81 @@ class ProductsController extends Controller
         Products_Images::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success','Service Alternate Image has been Deleted!');
     }
-    public function addAttributes(Request $request, $id=null ){
+  public function addAttributes(Request $request, $id=null ){
         $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
-        // $productDetails =json_decode(json_encode($productDetails));
+         $productDetails =json_decode(json_encode($productDetails));
         // echo "<pre>"; print_r($productDetails);die;
+         $productsDetails = Product::with('attributes')->where(['id'=>$id])->get();
+         $productsDetails = json_decode($productsDetails, true);
+         //echo "<pre>"; print_r($productsDetails);die;
 
         if ($request->isMethod('post')) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
 
-            foreach ($data['sku'] as $key => $val) {
+            foreach ($data['designs'] as $key => $val) {
                 if (!empty($val)) {
-                    //Prevent SKU duplicate entry
-                    $attrCountSKU = Products_Attributes::where('sku',$val)->count();
-                    if ($attrCountSKU>0) {
-                        return redirect('admin/add_attributes/'.$id)->with('flash_message_error', 'SKU already exists!Please add another SKU');
-                    }
-                    //Prevent Size duplicate entry
-                    $attrCountSizes = Products_Attributes::where(['product_id'=>$id, 'size'=>$data['size'][$key]])->count();
-                    if ($attrCountSizes>0) {
-                        return redirect('admin/add_attributes/'.$id)->with('flash_message_error',      '"'.$data['size'][$key].'Size already exists for this product!Please add another size');
-                    }
 
                     $attribute = new Products_Attributes;
                     $attribute->product_id = $id;
-                    $attribute->sku = $val;
-                    $attribute->color = $data['color'][$key];
-                    $attribute->size = $data['size'][$key];
+                    $attribute->designs = $val;
+                    $attribute->designers = $data['designers'][$key];
+                    $attribute->revisions = $data['revisions'][$key];
                     $attribute->price = $data['price'][$key];
-                    $attribute->stock = $data['stock'][$key];
+                    $attribute->guarantee = $data['guarantee'][$key];
+                     //Upload Image
+                    if ($request->hasFile('image')) {
+                        $image_tmp = Input::file('image');
+                        if ($image_tmp->isValid()) {
+                            $extension = $image_tmp->getClientOriginalExtension();
+                            $filename = rand(111,99999).'.'.$extension;
+                            $large_image_path = 'images/backend_images/products/large/'.$filename;
+                            $medium_image_path = 'images/backend_images/products/medium/'.$filename;
+                            $small_image_path = 'images/backend_images/products/small/'.$filename;
+                            // Resize Images
+                            Image::make($image_tmp)->save($large_image_path);
+                            Image::make($image_tmp)->resize(650,480)->save($medium_image_path);
+                            Image::make($image_tmp)->resize(300,300)->save($small_image_path);
+                            // Store image name in products table
+                            $attribute->image = $filename;
+                        }
+                    }
+
                     $attribute->save();
                 }
             }
             return redirect('admin/add_attributes/'.$id)->with('flash_message_success', 'Product Attributes have been updated Successfully!');
         }
 
-        return view('admin/products.add_attributes')->with(compact('productDetails'));
+        return view('admin/products.add_attributes')->with(compact('productDetails','productsDetails'));
+    }
+       public function products($url = null){
+
+        //Show error 404 if category does not exist
+        $countCategory = Category::where(['url'=>$url,'status'=>1])->count();
+        if ($countCategory==0) {
+            abort(404);
+        }
+
+        // Get all Categories and Sub Categories
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+        $categoryDetails = Category::where(['url'=>$url])->first();
+
+        if ($categoryDetails->parent_id==0) {
+            //if its a main category url
+            $subCategories = Category::where(['parent_id'=>$categoryDetails->id])->get();
+            foreach ($subCategories as $subcat) {
+                $cat_ids[] = $subcat->id.",";
+            }
+            $productsAll = Category::whereIn('id',$cat_ids)->get();
+            $productsAll = json_decode(json_encode($productsAll));
+            
+        }else{
+            // if its a sub category url
+            $productsAll = Category::where(['id'=>$categoryDetails->id])->get();
+        }
+
+        return view('listing')->with(compact('categories','categoryDetails','productsAll'));
     }
 
      public function addImages(Request $request, $id=null ){
@@ -301,7 +352,7 @@ class ProductsController extends Controller
 
     public function service($id = null){
         //Get Product Details
-        $serviceDetails = Package::where('id',$id)->get();
+        $serviceDetails =   Products_Attributes::where('id',$id)->get();
         $serviceDetails = json_decode(json_encode($serviceDetails));
         // echo "<pre>";print_r($serviceDetails);die;
 
@@ -334,7 +385,7 @@ class ProductsController extends Controller
              DB::table('carts')->insert(['product_id'=>$data['product_id'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
         }
 
-        return redirect('services.cart')->with('flash_message_success', 'Service has been Added in Cart');
+        return redirect('/cart')->with('flash_message_success', 'Service has been Added in Cart');
 
     }
     public function cart(){
@@ -356,7 +407,7 @@ class ProductsController extends Controller
     } 
 
     public function deleteCart($id = null){
-        Cart::where(['id'=>$id])->delete();
+        Carts::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success','Service has been Deleted Successfully!');
     }
     public function search(Request $request){
@@ -374,9 +425,7 @@ class ProductsController extends Controller
 
         return view('search-results')->with(compact('products'));
     }
-    public function Checkout(){
-        return view('services.checkout');
-    }
+
 
 }
 

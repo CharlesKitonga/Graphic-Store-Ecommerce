@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Package;
 use Illuminate\Support\Facades\Input;
 use App\Category;
+use App\Products_Attributes;
 use Image;  
 use Auth;
 use DB;
 
 class PackageController extends Controller
 {
-         public function addPackage(Request $request){
+    public function addPackage(Request $request, $category_name=null){
 
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -63,14 +64,19 @@ class PackageController extends Controller
         return view('admin.packages.add_package')->with(compact('categories_dropdown'));
     }
        public function viewPackages(Request $request){
-
-        $packages = Package::get();
+                //Show error 404 if category does not exist
+        $countPackage = Products_Attributes::where(['category_name'=>$category_name])->count();
+        if ($countPackage==0) {
+            abort(404);
+        }
+        $packages = Products_Attributes::get();
         $packages = json_decode(json_encode($packages));
+
         // foreach($products as $key => $val){
         //     $category_name = Category::where(['id'=>$val->category_id])->first();
         //     $products[$key]->category_name = $category_name->category_name;
         // }
         // echo "<pre>"; print_r($products); die;
-        return view('admin.packages.view_packages')->with(compact('packages'));
+        return view('admin.packages.view_packages')->with(compact('packages','package'));
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id','fname','lname','place','street','number','email','total','status'];
+ 	  protected $fillable = ['user_id','name','email','address','country','mobile','delivered','total','status'];
 
     public function user()
     {
@@ -15,10 +15,10 @@ class Order extends Model
 
 
     public function orderItems(){
-    	return $this->belongsToMany(Product::class)->withPivot('quantity');
+    	return $this->belongsToMany(Product::class)->withPivot('designs');
     }
 
     public function products(){
-    	return $this->belongsToMany('App\Product')->withPivot('quantity');
+    	return $this->belongsToMany('App\Product')->withPivot('designs');
     }
 }

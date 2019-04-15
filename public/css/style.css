@@ -527,7 +527,7 @@ ul.multi-column-dropdown:nth-child(3) {
 	background-size:cover;
 }
 .banner-right{
-	background:url(../images/img3.jpg)no-repeat 0px 0px;
+    background:url(../images/white.png)no-repeat 0px 0px;
 	background-size:cover;
 	min-height:300px;
 	padding-top: 2em;
