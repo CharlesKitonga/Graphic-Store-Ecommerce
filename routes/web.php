@@ -36,7 +36,7 @@ Route::match(['get','post'],'/package/{category_name}', 'PagesController@Package
 Route::get('/service/{id}','ProductsController@service');
 
 //Cart Page Route
-Route::match(['get','post'],'/cartsPP','ProductsController@cart');
+Route::match(['get','post'],'/cart','ProductsController@cart');
 Route::match(['get','post'],'/cart/delete_cart/{id}','ProductsController@deleteCart');
 
 //Add to Cart Route
@@ -89,7 +89,17 @@ Route::get('/admin/categories/view_category','CategoryController@viewCategories'
 //Add Jobs Completed by Specific People Route
 Route::match(['get','post'],'/admin/add_job','JobController@addJob');
 Route::get('/admin/jobs/view_jobs','JobController@viewJobs');
-Route::get('/admin/delete_job/{id}','JobController@deleteJob');
+Route::get('/admin/delete_job/{id}','TestimonialController@deleteJob');
+
+//Add Testimonials Completed by Specific People Route
+Route::match(['get','post'],'/admin/add_testimonial','TestimonialController@addTestimonial');
+Route::get('/admin/testimonials/view_testimonials','TestimonialController@viewTestimonials');
+Route::get('/admin/delete_job/{id}','TestimonialController@deleteJob');
+
+//Add Project upgrades
+Route::match(['get','post'],'/admin/add_upgrade','UpgradeController@addUpgrade');
+Route::get('/admin/testimonials/view_upgrades','UpgradeController@viewUpgrades');
+Route::get('/admin/delete_job/{id}','UpgradeController@deleteJob');
 
 //Add Packages offered Route
 Route::match(['get','post'],'/admin/add_package','PackageController@addPackage');
@@ -129,8 +139,8 @@ Route::match(['get','post'],'/admin/edit_order/{id}','OrderController@editOrder'
 Route::get('/logout', 'AdminController@logout');
 
 //following routes deal with shopping cart
-Route::resource('cart', 'CartController', ['only' => ['index', 'store', 'update', 'destroy']]);
-Route::post('/cart', 'CartController@store')->name('cart.store');
+Route::resource('carts', 'CartController', ['only' => ['index', 'store', 'update', 'destroy']]);
+Route::post('/cartpp', 'CartController@store')->name('cart.store');
 Route::delete('emptyCart', 'CartController@emptyCart');
 Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');

@@ -23,15 +23,15 @@
 		</div>
 		<div class="gallery-info">
 			@foreach($packages as $package)
-			<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay=".1.1s" style="margin-right: 10px; margin-top: 25px;">
-				<a href="products.html"><img style="width:110px; margin-bottom: 25px;" src="{{asset('images/backend_images/products/small/'.$package->image)}}" class="img-responsive" alt=""/></a>
+			<div class="col-md-8 gallery-grid wow flipInY animated" data-wow-delay=".1.1s" style="margin-right: 10px; width: 300px; margin-top: 25px;">
+				<a ><img style="width:110px; margin-bottom: 25px;" src="{{asset('images/backend_images/products/small/'.$package->image)}}" class="img-responsive" alt=""/></a>
 				<div class="gallery-text simpleCart_shelfItem">
-					<h1><a style="margin-top: 10px; font-family: Helvetica;font-size: 22px;text-align:justify;"  class="name" href="single.html">{{$package->designs}} </a></h1>
-					<h2 style="margin-top: 10px; font-family: Helvetica;text-align:justify;" class="name">{{$package->designers}}</h2>
-					<h3 style="margin-top: 10px; font-family: Helvetica;text-align:justify;" class="name">{{$package->revisions}}</h3>
-					<h4 style="margin-top: 10px; font-family: Helvetica;text-align:justify;" class="name">{{$package->gurantee}}</h4>
-					<h5><a style="margin-top: 10px; font-family: Helvetica;text-align:justify;" class="name" style="font-size: 16px;">US$ {{$package->price}} </a></h5>
-					<button style="font-size: 26px; margin-top: 20px;" class="label label-success"><a href="{{url('/service/'.$package->id)}}" > Select</a></button> 
+					<h1><a style="margin-top: 10px; font-family: Helvetica;font-size: 22px;text-align:justify;"  class="name" >{{$package->designs}} </a></h1>
+					<h2 style="margin-top: 10px; font-family: Helvetica;text-align:justify;font-size: 16px;" class="name">{{$package->designers}}</h2>
+					<h3 style="margin-top: 10px; font-family: Helvetica;text-align:justify;font-size: 16px;" class="name">{{$package->revisions}}</h3>
+					<h4 style="margin-top: 10px; font-family: Helvetica;text-align:justify;font-size: 16px;" class="name">{{$package->gurantee}}</h4>
+					<h5><a style="margin-top: 10px; font-family: Helvetica;text-align:justify; margin-right: 180px;" class="name" style="font-size: 13px;">$ {{$package->price}} </a></h5>
+					<button style="font-size: 26px;font-family: Helvetica; margin-top: 10px; margin-right: 150px;" class="label label-success"><a href="{{url('/service/'.$package->id)}}" > Select</a></button> 
 				</div>
 			</div>
 			@endforeach

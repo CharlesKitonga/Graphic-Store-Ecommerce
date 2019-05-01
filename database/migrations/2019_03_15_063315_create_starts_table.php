@@ -16,8 +16,9 @@ class CreateStartsTable extends Migration
         Schema::create('starts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('project');
+            $table->string('session_id');
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

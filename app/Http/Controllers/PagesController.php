@@ -13,8 +13,9 @@ use App\Category;
 use App\Job;
 use App\Start;
 use App\Package;
+use App\Testimonial;
 use Session;
-use App\Products_attributes;
+use App\Products_Attributes;
 class PagesController extends Controller
 {
     public function Index($id = null){
@@ -42,8 +43,11 @@ class PagesController extends Controller
     	$categories = Category::with('categories')->where(['parent_id'=>0])->get();
         // $categories = json_decode(json_encode($categories));
         
+        //Get client testimonials
+        $testimonials = Testimonial::get();
+        $testimonials = json_decode(json_encode($testimonials));
 
-    	return view('index')->with(compact('allServices','sliderimages','categories_menu','productDetails','jobsdone','categories'));
+    	return view('index')->with(compact('allServices','sliderimages','categories_menu','productDetails','jobsdone','categories','testimonials'));
     }
 
     public function viewProducts($url = null){
@@ -62,6 +66,7 @@ class PagesController extends Controller
                 foreach ($subCategories as $subcat) {
                     $cat_ids[] = $subcat->id.",";
                 }
+
                 $productsAll = Category::whereIn('id',$cat_ids)->get();
                 $productsAll = json_decode(json_encode($productsAll));
                 

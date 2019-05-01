@@ -197,35 +197,7 @@ class ProductsController extends Controller
         return redirect()->back()->with('flash_message_success','Service Image has been Deleted!');
     }
 
-    public function deleteAltImage($id = null){
-        
-        //Get Product Image Name
-        $productImage = Products_Images::where(['id'=>$id])->first();
-
-        //Get Product Image path
-        $large_image_path = 'images/backend_images/products/large/';
-        $medium_image_path = 'images/backend_images/products/medium/';
-        $small_image_path = 'images/backend_images/products/small/';
-
-        //Delete Large Image if not exist in large folder
-        if (file_exists($large_image_path.$productImage->image)) {
-            unlink($large_image_path.$productImage->image);
-        }
-
-        //Delete Large Image if not exist in large folder
-        if (file_exists($medium_image_path.$productImage->image)) {
-            unlink($medium_image_path.$productImage->image);
-        }
-        //Delete Small Image if not exist in large folder
-        if (file_exists($small_image_path.$productImage->image)) {
-            unlink($small_image_path.$productImage->image);
-        }
-
-        //Delete Image from Products table
-        Products_Images::where(['id'=>$id])->delete();
-        return redirect()->back()->with('flash_message_success','Service Alternate Image has been Deleted!');
-    }
-  public function addAttributes(Request $request, $id=null ){
+    public function addAttributes(Request $request, $id=null ){
         $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
          $productDetails =json_decode(json_encode($productDetails));
         // echo "<pre>"; print_r($productDetails);die;
@@ -273,7 +245,7 @@ class ProductsController extends Controller
 
         return view('admin/products.add_attributes')->with(compact('productDetails','productsDetails'));
     }
-       public function products($url = null){
+    public function products($url = null){
 
         //Show error 404 if category does not exist
         $countCategory = Category::where(['url'=>$url,'status'=>1])->count();
@@ -302,7 +274,7 @@ class ProductsController extends Controller
         return view('listing')->with(compact('categories','categoryDetails','productsAll'));
     }
 
-     public function addImages(Request $request, $id=null ){
+    public function addImages(Request $request, $id=null ){
         $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
 
         if ($request->isMethod('post')) {
@@ -378,11 +350,11 @@ class ProductsController extends Controller
         }
 
         $countProducts = 
-        DB::table('carts')->where(['product_id'=>$data['product_id'],'designs'=>$data['designs'],'session_id'=>$session_id])->count();
+        DB::table('carts')->where(['category_name'=>$data['category_name'],'designs'=>$data['designs'],'session_id'=>$session_id])->count();
         if ($countProducts>0) {
             return redirect()->back()->with('flash_message_error','Service already exists in Cart!');
         }else{
-             DB::table('carts')->insert(['product_id'=>$data['product_id'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
+             DB::table('carts')->insert(['category_name'=>$data['category_name'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
         }
 
         return redirect('/cart')->with('flash_message_success', 'Service has been Added in Cart');
@@ -393,7 +365,7 @@ class ProductsController extends Controller
         $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
 
         foreach ($userCart as $key => $product) {
-            $productDetails = Package::where('id',$product->product_id)->first();
+            $productDetails = Products_Attributes::where('id',$product->id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
             // Get Cart Total Amount

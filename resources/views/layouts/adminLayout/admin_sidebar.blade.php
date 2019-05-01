@@ -15,12 +15,25 @@
        
         <li><a href="{{url('/admin/jobs/view_packages')}}">View Packages</a></li>
       </ul>
+    </li>   
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Testimonials</span> <span class="   label label-important"></span></a>
+      <ul>
+        <li><a href="{{url('/admin/add_testimonial')}}">Add Testimonial</a></li>       
+        <li><a href="{{url('/admin/testimonials/view_testimonials')}}">View Testimonials</a></li>
+      </ul>
     </li>
      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Completed Jobs</span> <span class="   label label-important"></span></a>
       <ul>
        
         <li><a href="{{url('/admin/add_job')}}">Add Job</a></li>
         <li><a href="{{url('/admin/jobs/view_jobs')}}">View Jobs Done</a></li>
+      </ul>
+    </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Project Upgrades</span> <span class="   label label-important"></span></a>
+      <ul>
+       
+        <li><a href="{{url('/admin/add_upgrade')}}">Add an Upgrade</a></li>
+        <li><a href="{{url('/admin/jobs/view_upgrades')}}">View Project Upgrades</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span> Sliders</span> <span class="   label label-important"></span></a>

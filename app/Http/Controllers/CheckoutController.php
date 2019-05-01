@@ -40,15 +40,18 @@ class CheckoutController extends Controller
        }
         $countries = Country::get();
         $details = Package::first();
-        $session_id = Session::get('session_id');
-        $project = DB::table('starts')->where(['session_id'=>$session_id])->get();
+        $session_id = Session::get('session_id'); 
+        $projects = DB::table('starts')
+                ->where('session_id', 'like', '%')
+                ->first();
+;
         $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
          // Get Cart Total Amount
         $total_amount = 0;
         foreach($userCart as $item){
             $total_amount = $total_amount + ($item->price );
         }
-        return view('services.checkout')->with(compact('details','project','total_amount','countries','userDetails'));
+        return view('services.checkout')->with(compact('details','projects','total_amount','countries','userDetails','userCart'));
     }
 
     public function guestCheckout(Request $request, $id=null){
@@ -72,15 +75,20 @@ class CheckoutController extends Controller
         $countries = Country::get();
         $details = Package::first();
         //$projects = Start::where(['id'=>$id])->get();
-         Session::get('session_id');
+        $session_id = Session::get('session_id'); 
         $projects = DB::table('starts')
                 ->where('session_id', 'like', '%')
                 ->first();
-
+        $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
+        // Get Cart Total Amount
+        $total_amount = 0;
+        foreach($userCart as $item){
+            $total_amount = $total_amount + ($item->price );
+        }
         //echo "<pre>";print_r($projects);die;
 
         
-        return view('services.checkout')->with(compact('details','projects','total_amount','countries','userDetails'));
+        return view('services.checkout')->with(compact('details','projects','total_amount','countries','userDetails','userCart'));
 
     }
 

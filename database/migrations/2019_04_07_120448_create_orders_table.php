@@ -22,9 +22,9 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('country');
-            $table->integer('mobile');
+            $table->bigInteger('mobile');
             $table->tinyInteger('delivered')->unsigned();
-            $table->integer('total');
+            $table->integer('total')->nullable();
             $table->string('error')->nullable();     
             $table->timestamps();
         });

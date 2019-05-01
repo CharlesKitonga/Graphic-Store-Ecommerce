@@ -78,7 +78,7 @@
 				@foreach($allServices as $service)
 				<div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated" style="margin-right: 10px; margin-top: 25px;" data-wow-delay=".9s">
 					<div class="new-top">
-						<a href="single.html"><img src="{{asset('images/backend_images/products/small/'.$service->image)}}" class="img-responsive" alt=""/></a>
+						<a href=""><img src="{{asset('images/backend_images/products/small/'.$service->image)}}" class="img-responsive" alt=""/></a>
 						<div class="new-text">
 							<ul>
 								@if($service->status=="1")
@@ -90,7 +90,7 @@
 						</div>
 					</div>
 					<div class="new-bottom">
-						<h5><a class="name" href="single.html">{{$service->category_name}} </a></h5>
+						<h5><a class="name" href="">{{$service->category_name}} </a></h5>
 						<div class="rating">
 							<span class="on">☆</span>
 							<span class="on">☆</span>
@@ -116,9 +116,9 @@
 			<div class="gallery-info">
 				@foreach($jobsdone as $jobs)
 				<div class="col-md-3 gallery-grid wow flipInY animated" data-wow-delay=".1.1s" style="margin-right: 10px; margin-top: 25px;">
-					<a href="products.html"><img src="{{asset('images/backend_images/products/small/'.$jobs->image)}}" class="img-responsive" alt=""/></a>
+					<a href=""><img src="{{asset('images/backend_images/products/small/'.$jobs->image)}}" class="img-responsive" alt=""/></a>
 					<div class="gallery-text simpleCart_shelfItem">
-						<h5><a class="name" href="single.html">{{$jobs->category_name}} </a></h5>
+						<h5><a class="name" href="">{{$jobs->category_name}} </a></h5>
 						<ul>
 							<li><a href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a></li>
 							<li><a class="item_add" href="#"><span class="glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
@@ -140,39 +140,19 @@
 				<section class="slider grid">
 					<div class="flexslider trend-slider">
 						<ul class="slides">
+							@foreach($testimonials as $testimonial)
 							<li>
 								<div class="col-md-5 trend-left">
-									<img src="images/t1.png" alt=""/>
+									<img src="{{ asset('/images/backend_images/products/small/'.$testimonial->image) }}" alt=""/>
 								</div>
 								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
+									<h4>What Our<span>  Clients Say</span></h4>
+									<h5>{{$testimonial->customer_name}}</h5>
+									<p>{{$testimonial->description}}</p>
 								</div>
 								<div class="clearfix"></div>
 							</li>
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t2.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="col-md-5 trend-left">
-									<img src="images/t3.png" alt=""/>
-								</div>
-								<div class="col-md-7 trend-right">
-									<h4>TOP 10 TRENDS <span>FOR YOU</span></h4>
-									<h5>Flat 20% OFF</h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus, justo ac volutpat vestibulum, dolor massa pharetra nunc, nec facilisis lectus nulla a tortor. Duis ultrices nunc a nisi malesuada suscipit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu bibendum felis. Sed viverra dapibus tincidunt.</p>
-								</div>
-								<div class="clearfix"></div>
-							</li>
+							@endforeach
 							<li>
 								<div class="col-md-5 trend-left">
 									<img src="images/t4.png" alt=""/>

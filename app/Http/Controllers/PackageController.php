@@ -64,11 +64,7 @@ class PackageController extends Controller
         return view('admin.packages.add_package')->with(compact('categories_dropdown'));
     }
        public function viewPackages(Request $request){
-                //Show error 404 if category does not exist
-        $countPackage = Products_Attributes::where(['category_name'=>$category_name])->count();
-        if ($countPackage==0) {
-            abort(404);
-        }
+            
         $packages = Products_Attributes::get();
         $packages = json_decode(json_encode($packages));
 

@@ -16,10 +16,13 @@ class CreateProductsAttributesTable extends Migration
         Schema::create('products__attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
-            $table->string('sku');
-            $table->string('size');
+            $table->string('category_name');
+            $table->string('designs');
+            $table->string('designers');
+            $table->string('revisions');
+            $table->string('guarantee');
             $table->float('price');
-            $table->integer('stock');
+            $table->float('image');
             $table->timestamps();
         });
     }

@@ -22,4 +22,6 @@ class Category extends Model
     public function attributes(){
     	return $this->hasMany('App\Products_Attributes','product_id');
     }
+            public $cat_ids;        
+
 }

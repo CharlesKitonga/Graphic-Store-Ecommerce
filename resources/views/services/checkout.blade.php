@@ -38,13 +38,13 @@
 					<strong>{{$projects->description}}</strong> 
 				</div>
 				<br>
-				@foreach (Cart::content() as $item)
-				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 150px;" >Category Name </span> <i class="ti ti-email"></i>{{$item->model->category_name}} </a> 
+				@foreach ($userCart as $item)
+				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 150px;" >Category Name </span> <i class="ti ti-email"></i>{{$item->category_name}} </a> 
 
 				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 215px;"  >Designs</span> <i class="ti ti-email"></i>{{$item->designs}}  </a>
-				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 205px;"  >Designers</span> <i class="ti ti-email"></i>{{$item->model->designers}}  </a>
+				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 205px;"  >Designers</span> <i class="ti ti-email"></i>{{$item->designers}}  </a>
 				@endforeach
-				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 240px;"  >Total</span> <i class="ti ti-email"></i>$ {{ Cart::total() }}</a>
+				<a href="#" class="list-group-item"><span style="font-weight: bolder; font-size: 17px; margin-right: 240px;"  >Total</span> <i class="ti ti-email"></i>$ <?php echo $total_amount; ?></a>
 			</div>
 		</div>
 	</div>
@@ -71,7 +71,7 @@
 				<label>Address</label>
 				<input type="text" value="{{$userDetails->address}}" id="address" name="address" class="address" placeholder="Address" required="">	
 				<label>Country</label>
-				<select style="width: 455px; min-height: 50px;" id="country" name="country">
+				<select style="width: 555px; min-height: 50px;" id="country" name="country">
 					<option value="">Select Country</option>
 					@foreach($countries as $country)
 						<option value="{{$country->country_name}}" @if($country->country_name == $userDetails->country) Selected @endif>{{$country->country_name}}</option>
@@ -87,7 +87,7 @@
 				<label>Address</label>
 				<input type="text" id="address" name="address" class="address" placeholder="Address" required="">	
 				<label>Country</label>
-				<select style="width: 455px; min-height: 50px;" id="country" name="country">
+				<select style="width: 555px; min-height: 50px;" id="country" name="country">
 					<option value="">Select Country</option>
 					@foreach($countries as $country)
 						<option value="{{$country->country_name}}" @if($country->country_name == $userDetails->country) Selected @endif>{{$country->country_name}}</option>

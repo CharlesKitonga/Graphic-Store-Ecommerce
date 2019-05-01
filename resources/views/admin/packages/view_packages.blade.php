@@ -28,6 +28,7 @@
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
+                  <th>Category Nmae</th>
                   <th>Designs</th>
                   <th>Designer(s)</th>
                   <th>Revisions</th>
@@ -40,6 +41,7 @@
                
               	@foreach($packages as $package)
                 <tr class="gradeX">
+                  <td>{{$package->category_name}}</td>
                   <td>{{$package->designs}}</td>
                   <td>{{$package->designers}}</td>
                   <td>{{$package->revisions}}</td>
