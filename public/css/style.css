@@ -38,6 +38,59 @@ body a:hover{
     border-top: none;
 	min-height: 40px;
 }
+.banner-area {
+         
+  background: url(../img/banner/banner-bg.jpg) center no-repeat;
+  background-size: cover;
+  position: relative; }
+  @media (max-width: 768px) {
+    .banner-area .fullscreen {
+      height: 650px !important; } }
+  .banner-area .active-banner-slider .owl-nav {
+    position: absolute;
+    right: 0;
+    bottom: -200px; }
+    @media (max-width: 1920px) {
+      .banner-area .active-banner-slider .owl-nav {
+        right: -115px; } }
+    @media (max-width: 1680px) {
+      .banner-area .active-banner-slider .owl-nav {
+        right: 0px; } }
+    @media (max-width: 991px) {
+      .banner-area .active-banner-slider .owl-nav {
+        display: none; } }
+    .banner-area .active-banner-slider .owl-nav .owl-prev,
+    .banner-area .active-banner-slider .owl-nav .owl-next {
+      display: inline-block;
+      margin: 10px;
+      opacity: .5;
+      -webkit-transition: all 0.3s ease 0s;
+      -moz-transition: all 0.3s ease 0s;
+      -o-transition: all 0.3s ease 0s;
+      transition: all 0.3s ease 0s; }
+      .banner-area .active-banner-slider .owl-nav .owl-prev:hover,
+      .banner-area .active-banner-slider .owl-nav .owl-next:hover {
+        opacity: 1; }
+  .banner-area .banner-content {
+    padding-left: 10px; }
+    @media (max-width: 991px) {
+      .banner-area .banner-content {
+        padding-left: 0; } }
+    .banner-area .banner-content h1 {
+      font-size: 60px;
+      line-height: 66px;
+      font-weight: 700;
+      margin-bottom: 30px; }
+      @media (max-width: 767px) {
+        .banner-area .banner-content h1 {
+          font-size: 35px;
+          line-height: 46px; } }
+    .banner-area .banner-content p {
+      margin: 0; }
+  @media (max-width: 991px) {
+    .banner-area .banner-img {
+      display: none; } }
+
 .navbar-right {
     margin-right: 0;
 }

@@ -79,6 +79,12 @@ Route::get('/admin/dashboard', 'AdminController@dashboard');
 Route::get('/admin/settings','AdminController@settings');
 Route::get('/admin/check-pwd','AdminController@chkPassword');
 Route::match(['get','post'],'/admin/update-pwd','AdminController@updatePassword');
+//Blog page Route
+Route::match(['get','post'], '/blogs', 'BlogController@index');
+Route::match(['get','post'],'/blogDetails/{id}','BlogController@showDetails');
+//admin end for blogs
+Route::match(['get','post'], '/admin/create-blogs','BlogController@createBlog');
+Route::match(['get','post'], '/admin/blogs/view_blogs','BlogController@viewBlogs');
 
 //Categories Routes (Admin)
 Route::match(['get','post'],'/admin/categories/add_category','CategoryController@addCategory');

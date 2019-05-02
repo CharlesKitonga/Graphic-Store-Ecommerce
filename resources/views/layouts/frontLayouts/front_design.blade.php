@@ -4,6 +4,7 @@
    <title>Design The World</title>
    <!-- for-mobile-apps -->
    <meta name="viewport" content="width=device-width, initial-scale=1">
+
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <meta name="keywords" content="Modern Shoppe Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
@@ -29,7 +30,7 @@
    <link href='//fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
    <!--web-fonts-->
    <!--animation-effect-->
-   <link href="{{asset('css/animate.min.css')}}" rel="stylesheet"> 
+   <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
    <script src="{{asset('js/wow.min.js')}}"></script>
       <script>
        new WOW().init();
@@ -81,7 +82,7 @@
        ================================================== -->
        <!--Placed at the end of the document so the pages load faster -->
        <script src="{{asset('js/bootstrap.js')}}"></script>
-       <script src="{{asset('js/jquery.validate.js')}}"></script>
+       <script src="{{asset('js/jquery.validate.js')}}"></script> 
 
    </body>
    </html>

@@ -22,6 +22,12 @@
         <li><a href="{{url('/admin/testimonials/view_testimonials')}}">View Testimonials</a></li>
       </ul>
     </li>
+       <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Blogs</span> <span class="   label label-important"></span></a>
+      <ul>
+        <li><a href="{{url('/admin/create-blogs')}}">Add Blog</a></li>       
+        <li><a href="{{url('/admin/blogs/view_blogs')}}">View Blogs</a></li>
+      </ul>
+    </li>
      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Completed Jobs</span> <span class="   label label-important"></span></a>
       <ul>
        

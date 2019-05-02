@@ -78,6 +78,7 @@ $categories = Controller::categories();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav top-nav-info">
                   <li><a href="{{url('/')}}" class="active">Home</a></li>
+                  <li><a href="{{url('/blogs')}}" class="active">Blog</a></li>
                   @foreach($mainCategories as $cat)
                            @if($cat->status=="1")    
                    <li class="dropdown grid">
