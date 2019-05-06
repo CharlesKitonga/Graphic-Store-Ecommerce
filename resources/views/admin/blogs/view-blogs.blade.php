@@ -33,6 +33,7 @@
                   <th>Heading</th>
                   <th>Title</th>
                   <th>Content</th>
+                  <th>Description</th>
                   <th>Image</th>
                   <th>Actions</th>
                 </tr>
@@ -45,6 +46,7 @@
                   <td>{{$blog->heading}}</td>
                   <td>{{$blog->title}}</td>
                   <td>{{$blog->content}}</td>
+                  <td>{{$blog->description}}</td>
                    <td>
                     @if(!empty($blog->image))
                       <img src="{{ asset('/images/backend_images/products/small/'.$blog->image) }}" style="width:60px;">
@@ -52,9 +54,9 @@
                   </td>   
                   <td class="center">
                      <a href="#myModal{{$blog->id}}" data-toggle="modal" class="btn btn-success btn-mini" title="View Product">View</a></div> 
-                     <a href="{{url('/admin/edit_product/'.$blog->id)}}" class="btn btn-primary btn-mini" title="Edit blog">Edit</a> 
-                     <a href="{{url('/admin/add_images/'.$blog->id)}}" class="btn btn-info btn-mini" title="Add Images">Add </a>
-                      <a rel="{{ $blog->id }}" rel1="delete_blog" <?php /* href="{{url('/admin/delete_category/'.$product->id)}}" */?> href ="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Product">Delete</a>
+                     <a href="{{url('/admin/edit_blog/'.$blog->id)}}" class="btn btn-primary btn-mini" title="Edit blog">Edit</a> 
+                     <a href="{{url('/admin/add_blog_images/'.$blog->id)}}" class="btn btn-info btn-mini" title="Add Images">Add </a>
+                      <a rel="{{$blog->id }}" rel1="delete_blog" <?php /* href="{{url('/admin/delete_category/'.$product->id)}}" */?> href ="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Product">Delete</a>
                   </td>
                 </tr>
                     <div id="myModal{{$blog->id}}" class="modal hide">

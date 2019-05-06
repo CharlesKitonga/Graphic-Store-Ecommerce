@@ -90,7 +90,7 @@
                     <h1>Blog Page</h1>
                     <nav class="d-flex align-items-center">
                         <a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Blog</a>
+                        <a href="blogs">Blog</a>
                     </nav>
                 </div>
             </div>
@@ -107,11 +107,11 @@
                         <img src="img/blog/cat-post/cat-post-3.jpg" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
-                                <a href="blog-details.html">
-                                    <h5>Social Life</h5>
+                                <a href="blogs">
+                                    <h5>Graphic Design</h5>
                                 </a>
                                 <div class="border_line"></div>
-                                <p>Enjoy your social life together</p>
+                                <p>Enjoy your designing some great features</p>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <img src="img/blog/cat-post/cat-post-2.jpg" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
-                                <a href="blog-details.html">
+                                <a href="blogs">
                                     <h5>Politics</h5>
                                 </a>
                                 <div class="border_line"></div>
@@ -135,7 +135,7 @@
                         <img src="img/blog/cat-post/cat-post-1.jpg" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
-                                <a href="blog-details.html">
+                                <a href="blogs">
                                     <h5>Food</h5>
                                 </a>
                                 <div class="border_line"></div>
@@ -173,9 +173,9 @@
                                     <img src="{{asset('images/backend_images/products/small/'.$blog->image)}}" alt="">
                                     <div class="blog_details">
                                         <a href="{{url('/blogDetails/'.$blog->id)}}">
-                                            <h2>{{$blog->title}}</h2>
+                                            <h2>{{$blog->heading}}</h2>
                                         </a>
-                                        <p>{{$blog->content}}.</p>
+                                        <p>{{$blog->title}}.</p>
                                         <a href="{{url('/blogDetails/'.$blog->id)}}" class="white_bg_btn">View More</a>
                                     </div>
                                 </div>

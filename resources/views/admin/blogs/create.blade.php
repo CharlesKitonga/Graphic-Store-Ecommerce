@@ -37,22 +37,27 @@
                  <div class="control-group">
                 <label class="control-label">Heading</label>
                 <div class="controls">
-                  <input type="text" name="heading" id="heading">
+                  <input type="text" name="heading" id="heading" placeholder="A general heading to the subject">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Title</label>
                 <div class="controls">
-                  <input type="text" name="title" id="title">
+                  <input type="text" name="title" id="title" placeholder="The title of what you are going to talk about">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Content</label>
                 <div class="controls">
-                  <textarea name="content" id="description"></textarea>
+                  <textarea name="content" id="description" placeholder="An introduction to the blog 1 to 3 paragraphs"></textarea>
                 </div>
               </div>
-            
+              <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                  <textarea name="description" id="description" placeholder="A more description of what you are writing about mayybe 2 to 3 more paragraphs"></textarea>
+                </div>
+              </div>
               <div class="control-group">
                 <label class="control-label">Image</label>
                 <div class="controls">

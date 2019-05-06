@@ -85,6 +85,11 @@ Route::match(['get','post'],'/blogDetails/{id}','BlogController@showDetails');
 //admin end for blogs
 Route::match(['get','post'], '/admin/create-blogs','BlogController@createBlog');
 Route::match(['get','post'], '/admin/blogs/view_blogs','BlogController@viewBlogs');
+Route::match(['get','post'],'/admin/edit_blog/{id}','BlogController@editBlog');
+Route::match(['get','post'],'/admin/delete_blog/{id}','BlogController@deleteBlog');
+Route::get('/admin/delete_blog_image/{id}', 'BlogController@deleteBlogImage');
+Route::match(['get', 'post'], 'admin/add_blog_images/{id}', 'BlogController@addBlogImages');
+
 
 //Categories Routes (Admin)
 Route::match(['get','post'],'/admin/categories/add_category','CategoryController@addCategory');
