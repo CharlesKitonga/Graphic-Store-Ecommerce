@@ -21,7 +21,7 @@
 			<label>Name of Your Project</label>
 			<input type="text" name="project" placeholder="Name of Your Project" required=""><br>
 			<label>Describe Your Project</label><br>
-			<textarea rows="4" cols="65" name="description" placeholder="Describe Your Project A little bit More" required=""></textarea><br><br>
+			<textarea rows="4" class="form-control" cols="65" name="description" placeholder="Describe Your Project A little bit More" required=""></textarea><br><br>
 			<label>Upload Image Samples(optional)</label><br><br> 	
 			<input type="file" name="image"  placeholder="Upload some samples(optional)"><br>
 			<input type="submit" name="continue" value="Continue">

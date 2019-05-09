@@ -33,7 +33,7 @@ class OrderPlaced extends Mailable
     {
         return $this->to($this->order->email, $this->order->name)
                     ->bcc('charleskyalo006@gmail.com')
-                    ->subject('Order For Laravel Ecommerce Example')
+                    ->subject('Order For Graphic Store Design')
                     ->markdown('emails.orders.placed');
     }
 }

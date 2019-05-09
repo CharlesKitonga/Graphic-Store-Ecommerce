@@ -8,6 +8,7 @@ use Auth;
 use Session;
 use App\Country;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Middleware\Frontlogin;
 
 class UserController extends Controller
 {

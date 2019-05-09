@@ -71,7 +71,7 @@
 				<label>Address</label>
 				<input type="text" value="{{$userDetails->address}}" id="address" name="address" class="address" placeholder="Address" required="">	
 				<label>Country</label>
-				<select style="width: 555px; min-height: 50px;" id="country" name="country">
+				<select style="width: 555px; min-height: 50px;" id="country" name="country" class="form-control">
 					<option value="">Select Country</option>
 					@foreach($countries as $country)
 						<option value="{{$country->country_name}}" @if($country->country_name == $userDetails->country) Selected @endif>{{$country->country_name}}</option>

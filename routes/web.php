@@ -46,7 +46,7 @@ Route::match(['get','post'], '/register', 'UserController@Register');
 Route::match(['get','post'], '/user-login','UserController@Login');
 
 //User Account Route with middleware
-Route::group(['middleware'=>['frontLogin']],function(){
+Route::group(['middleware'=>['Frontlogin']],function(){
 	
 	Route::match(['get','post'], '/account', 'UserController@Account');
 	//check current password
