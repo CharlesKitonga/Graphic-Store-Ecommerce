@@ -60,8 +60,7 @@ Route::match(['get','post'], '/checkout','CheckoutController@Checkout')->middlew
 Route::get('/guest-checkout','CheckoutController@guestCheckout');
 
 //billing info route
-Route::match(['get','post'],'/billing','CheckoutController@billingInfo');
-
+Route::match(['get','post'],'/billing', 'CheckoutController@storePayment');
 //User's logout
 Route::get('/user-logout','UserController@logout');
 
@@ -155,3 +154,10 @@ Route::post('/cartpp', 'CartController@store')->name('cart.store');
 Route::delete('emptyCart', 'CartController@emptyCart');
 Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
+
+//mail route to user
+Route::get('/mailable', function(){
+	$order = App\Order::find(3);
+
+	return new App\Mail\OrderPlaced($order);
+});

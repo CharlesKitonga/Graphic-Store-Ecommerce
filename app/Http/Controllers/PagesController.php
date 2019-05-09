@@ -15,7 +15,6 @@ use App\Start;
 use App\Package;
 use App\Testimonial;
 use Session;
-use App\Products_Attributes;
 class PagesController extends Controller
 {
     public function Index($id = null){
@@ -80,7 +79,7 @@ class PagesController extends Controller
 
     public function Start(Request $request, $category_name=null){
           //Show error 404 if category does not exist
-        $countPackage = Products_Attributes::where(['category_name'=>$category_name])->count();
+        $countPackage = Product::where(['category_name'=>$category_name])->count();
         if ($countPackage==0) {
             abort(404);
         }
@@ -113,15 +112,15 @@ class PagesController extends Controller
             Session::put('session_id',$session_id);
              // echo "<pre>";print_r($starts);die;
             $starts->save();
-            $categories = Products_attributes::where(['category_name'=>$category_name])->first();
-            $productDetails = Products_attributes::first();
+            $categories = Product::where(['category_name'=>$category_name])->first();
+            $productDetails = Product::first();
 
             return redirect('package')->with(compact('productDetails'));
         }
-        $categories = Products_attributes::where(['category_name'=>$category_name])->first();
-        $packages = Products_attributes::where(['category_name'=>$category_name])->get();
+        $categories = Product::where(['category_name'=>$category_name])->first();
+        $packages = Product::where(['category_name'=>$category_name])->get();
         //$categories = json_decode(json_encode($categories));
-        $productDetails = Products_attributes::first();
+        $productDetails = Product::first();
 
         return view('services.start')->with(compact('categories','productDetails','packages'));
     }
@@ -156,12 +155,12 @@ class PagesController extends Controller
             Session::put('session_id',$session_id);
              // echo "<pre>";print_r($starts);die;
             $starts->save();
-            $categories = Products_attributes::where(['category_name'=>$category_name])->first();
-            $productDetails = Products_attributes::first();
+            $categories = Product::where(['category_name'=>$category_name])->first();
+            $productDetails = Product::first();
 
         }
 
-        $packages = Products_attributes::where(['category_name'=>$category_name])->get();
+        $packages = Product::where(['category_name'=>$category_name])->get();
 
         
         return view('package')->with(compact('packages'));

@@ -61,6 +61,7 @@
 				<div class="btn_form">
 					<form name="addtocartForm" id="addtocartForm" action="{{url('add-to-cart')}}" method="post">
 						 {!! csrf_field() !!}
+						<input type="hidden" name="product_id" value="{{ $service->id }}">
                         <input type="hidden" name="category_name" value="{{ $service->category_name }}">
                         <input type="hidden" name="designs" value="{{ $service->designs }}">
                         <input type="hidden" name="designers" value="{{ $service->designers }}">

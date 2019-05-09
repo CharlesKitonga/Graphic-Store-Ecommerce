@@ -47,8 +47,6 @@
                 <tr class="gradeX">
                   <td>{{$order->id}}</td>
                   <td>{{$order->name}}</td>
-                  <td>{{$order->designs}}</td>
-                  <td>{{$order->designers}}</td>
                   <td>{{$order->address}}</td>
                   <td>{{$order->country}}</td>
                   <td>{{$order->mobile}}</td>

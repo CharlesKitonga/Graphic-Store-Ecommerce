@@ -20,7 +20,7 @@ class Category extends Model
     	return $this->hasMany('App\Job','category_id');
     }
     public function attributes(){
-    	return $this->hasMany('App\Products_Attributes','product_id');
+    	return $this->hasMany('App\Product','id');
     }
             public $cat_ids;        
 

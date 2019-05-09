@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Image;
 use App\Category;
-use App\Products_Attributes;
+use App\Product;
 class CategoryController extends Controller
 {
     public function addCategory(Request $request){
@@ -97,7 +97,7 @@ class CategoryController extends Controller
             foreach ($data['designs'] as $key => $val) {
                 if (!empty($val)) {
 
-                    $attribute = new Products_Attributes;
+                    $attribute = new Product;
                     $attribute->category_name = $category_name;
                     $attribute->designs = $val;
                     $attribute->designers = $data['designers'][$key];

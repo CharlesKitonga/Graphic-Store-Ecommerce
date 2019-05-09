@@ -31,8 +31,8 @@
               <thead>
                 <tr>
                   <th>Order ID</th>
-                  <th>Product</th>
-                  <th>Quantity</th>
+                  <th>Category</th>
+                  <th>Design</th>
                   <th>Price</th>
                   <th>Schedule for Delivery/Complete</th>
                   <th>Actions</th>
@@ -45,8 +45,8 @@
                     {{csrf_field()}}
                     <td>{{$order->id}}</td>
                     @foreach($order->orderItems as $item)
-                    <td>{{$item->product_name}}</td>   
-                    <td>{{$item->pivot->quantity}}</td>
+                    <td>{{$item->category_name}}</td>   
+                    <td>{{$item->pivot->designs}}</td>
                     @endforeach
                     <td>{{$order->total}}</td>
                       <td align="center">

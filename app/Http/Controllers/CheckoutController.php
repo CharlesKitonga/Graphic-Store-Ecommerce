@@ -8,10 +8,13 @@ use Session;
 use App\Start;
 use App\User;
 use App\Country;
+use App\Carts;
 use App\Package;
 use App\Order;
 use App\OrderProduct;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 use App\Http\Requests\CheckoutRequest;
 class CheckoutController extends Controller
 {
@@ -44,7 +47,7 @@ class CheckoutController extends Controller
         $projects = DB::table('starts')
                 ->where('session_id', 'like', '%')
                 ->first();
-;
+
         $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
          // Get Cart Total Amount
         $total_amount = 0;
@@ -91,28 +94,43 @@ class CheckoutController extends Controller
         return view('services.checkout')->with(compact('details','projects','total_amount','countries','userDetails','userCart'));
 
     }
+      //create a charge but for now its cash on delivery
+    public function storePayment(Request $request){
+        $data = $request->all();
+        //echo "<pre>";print_r($data); die;
+      $order = $this->addToOrdersTables($request, null);
+      Mail::send(new OrderPlaced($order));
 
-    public function billingInfo(Request $request){
-         $order = Order::create([
+      return view('thankyou');
+      
+    }
+      protected function addToOrdersTables($request, $error){
+        //insert into orders table
+          $session_id = Session::get('session_id'); 
+        $items = DB::table('carts')->where(['session_id'=>$session_id])->get();
+
+          foreach ($items as $item) {
+          $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
             'name' => $request->name,
-            'email' => $request->email,
-            'address' => $request->address,
-            'country' => $request->country,
-            'mobile' => $request->mobile,
-            'total' =>$request->total,
-            'status'=>0,
-            'error'=> null,
+             'email' => $request->email,
+             'address' => $request->address,
+             'country' => $request->country,
+             'mobile' => $request->mobile,
+             'total' =>$item->price,
+             'status'=>0,
+             'error'=> $error
           ]);
-        $session_id = Session::get('session_id');
-        $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
-        //insert into orderproducts table
-          foreach($userCart as $key => $item) {
+        }
+          //insert into orderproducts table
+          foreach ($items as $item) {
             OrderProduct::create([
               'order_id' => $order->id,
-              'product_id' => $item->id,
-              'designs' => $item->designs,
+              'product_id' => $item->product_id,
+              'designs' => $item->designs
             ]);
           }
-    }
+            return $order;
+
+          }
 }

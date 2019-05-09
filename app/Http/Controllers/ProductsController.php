@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Image;
 use Auth;
 use Session;
@@ -16,7 +17,6 @@ use App\SliderProducts;
 use App\Product;
 use App\Package;
 use App\Products_Images;
-use DB;
 use App\Carts;
 
 class ProductsController extends Controller
@@ -149,7 +149,7 @@ class ProductsController extends Controller
         return view('admin.products.view_products')->with(compact('products'));
     }
     public function viewProductsAttributes(Request $request){
-        $productsattributes = Products_Attributes::get();
+        $productsattributes = Product::get();
         $productsattributes = json_decode(json_encode($productsattributes));
         // foreach($products as $key => $val){
         //     $category_name = Category::where(['id'=>$val->category_id])->first();
@@ -324,7 +324,7 @@ class ProductsController extends Controller
 
     public function service($id = null){
         //Get Product Details
-        $serviceDetails =   Products_Attributes::where('id',$id)->get();
+        $serviceDetails =   Product::where('id',$id)->get();
         $serviceDetails = json_decode(json_encode($serviceDetails));
         // echo "<pre>";print_r($serviceDetails);die;
 
@@ -350,11 +350,11 @@ class ProductsController extends Controller
         }
 
         $countProducts = 
-        DB::table('carts')->where(['category_name'=>$data['category_name'],'designs'=>$data['designs'],'session_id'=>$session_id])->count();
+        DB::table('carts')->where(['product_id'=>$data['product_id'],'category_name'=>$data['category_name'],'designs'=>$data['designs'],'session_id'=>$session_id])->count();
         if ($countProducts>0) {
             return redirect()->back()->with('flash_message_error','Service already exists in Cart!');
         }else{
-             DB::table('carts')->insert(['category_name'=>$data['category_name'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
+             DB::table('carts')->insert(['product_id'=>$data['product_id'],'category_name'=>$data['category_name'],'designs'=>$data['designs'],'designers'=>$data['designers'],'revisions'=>$data['revisions'],'price'=>$data['price'],'user_email'=>$data['user_email'],'session_id'=>$session_id]);
         }
 
         return redirect('/cart')->with('flash_message_success', 'Service has been Added in Cart');
@@ -363,9 +363,10 @@ class ProductsController extends Controller
     public function cart(){
         $session_id = Session::get('session_id');
         $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
-
-        foreach ($userCart as $key => $product) {
-            $productDetails = Products_Attributes::where('id',$product->id)->first();
+        //dd($userCart);die();
+        foreach($userCart as $key => $product){
+            $productDetails = Product::where('id',$product->product_id)->first();
+            //dd($productDetails);die;
             $userCart[$key]->image = $productDetails->image;
         }
             // Get Cart Total Amount

@@ -31,12 +31,13 @@
               <thead>
                 <tr>
                   <th>Order ID</th>
-                  <th>Customer Name</th>
-                  <th>Delivery Place</th>
+                  <th>Customer Name</th> 
+                  <th>Address</th>
+                  <th>Country</th>
                   <th>Phone Number</th>
                   <th>Email</th>
-                  <th>Product</th>
-                  <th>Quantity</th>
+                 <th>Category</th>
+                  <th>Designs</th>
                   <th>Price</th>
                   <th>Actions</th>
                 </tr>
@@ -45,13 +46,14 @@
                 @foreach($orders as $order)
                 <tr class="gradeX">
                   <td>{{$order->id}}</td>
-                  <td>{{$order->fname}}</td>
-                  <td>{{$order->place}}</td>
-                  <td>{{$order->number}}</td>
+                  <td>{{$order->name}}</td>
+                  <td>{{$order->address}}</td>
+                  <td>{{$order->country}}</td>
+                  <td>{{$order->mobile}}</td>
                   <td>{{$order->email}}</td>
                   @foreach($order->orderItems as $item)
-                  <td>{{$item->product_name}}</td>   
-                  <td>{{$item->pivot->quantity}}</td>
+                  <td>{{$item->category_name}}</td>   
+                  <td>{{$item->pivot->designs}}</td>
                   @endforeach
                   <td>{{$order->total}}</td>
                   <td class="center">

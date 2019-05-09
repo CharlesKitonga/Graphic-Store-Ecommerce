@@ -43,5 +43,11 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'braintree'=> [
+        'environment' => env('BT_ENVIRONMENT', 'sandbox'),
+        'merchantId' =>env('83xhm5m3hrwhc3vz'),
+        'publickey' =>env('5q88g6d8fy8nkgxh'),
+        'privatekey' =>env('0afb8d0d23ab6df454644db740f44a7c'),
+    ],
 
 ];

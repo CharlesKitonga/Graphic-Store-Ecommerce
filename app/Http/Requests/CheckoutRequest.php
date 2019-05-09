@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
-
 class CheckoutRequest extends FormRequest
 {
     /**
@@ -13,9 +10,8 @@ class CheckoutRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,15 +19,21 @@ class CheckoutRequest extends FormRequest
      */
     public function rules()
     {
-        $emailValidation = auth()->user()?'required|email' : 'required|email|unique:users';
+        $emailValidation = auth()->user() ? 'required|email' : 'required|email|unique:users';
         return [
-            'email'=>$emailValidation,
+            'name' => 'required',
+            'email' => $emailValidation,
+            'address' => 'required',
+            'country' => 'required',
+            'mobile' => 'required',
+            'total' => 'required',
+            'number' => 'required'
         ];
     }
-    public function messages){
+    public function messages()
+    {
         return [
-            'email.unque'| 'You Already Have An Account with this email. Please <a href="/login">login</a> to continue ',
+            'email.unique' => 'You already have an account with this email address. Please <a href="/login">login</a> to continue.'
         ];
     }
-
 }

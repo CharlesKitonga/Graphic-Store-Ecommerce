@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Session;
+use DB;
 
 class OrderController extends Controller
 {
@@ -52,7 +54,7 @@ class OrderController extends Controller
             }
 
             Order::where(['id'=>$id])->update(['status'=>$status]);
-            return redirect('/admin/orders/pending')->with('flash_message_success','Order updated Successfully!');
+            return redirect('/orders/pending')->with('flash_message_success','Order updated Successfully!');
         }
         $orders=Order::where(['id'=>$id])->get();
         return view('admin/orders.edit_order')->with(compact('orders'));
