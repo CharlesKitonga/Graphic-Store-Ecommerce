@@ -69,16 +69,16 @@
 	<!--//banner-->
 	<!--new-->
 	<div class="new">
-		<div class="container">
+		<div class="container ">
 			<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
 				<h3 class="title">Our <span>Design Services</span></h3>
 				<p>Check out our services here!! </p>
 			</div>
 			<div class="new-info">
 				@foreach($allServices as $service)
-				<div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated" style="margin-right: 10px; margin-top: 25px;" data-wow-delay=".9s">
+				<div class="col-md-3 new-grid simpleCart_shelfItem wow flipInY animated" style=" margin-right: 10px; margin-top: 25px;" data-wow-delay=".9s">
 					<div class="new-top">
-						<a href=""><img src="{{asset('images/backend_images/products/small/'.$service->image)}}" class="img-responsive" alt=""/></a>
+						<a href="#"><img src="{{asset('images/backend_images/products/small/'.$service->image)}}" class="img-responsive" alt=""/></a>
 						<div class="new-text">
 							<ul>
 								@if($service->status=="1")
@@ -90,7 +90,7 @@
 						</div>
 					</div>
 					<div class="new-bottom">
-						<h5><a class="name" href="">{{$service->category_name}} </a></h5>
+						<h5><a class="name" href="#">{{$service->category_name}} </a></h5>
 						<div class="rating">
 							<span class="on">☆</span>
 							<span class="on">☆</span>

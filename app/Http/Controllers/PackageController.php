@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Package;
 use Illuminate\Support\Facades\Input;
 use App\Category;
-use App\Products_Attributes;
+use App\Product;
 use Image;  
 use Auth;
 use DB;
@@ -65,7 +65,7 @@ class PackageController extends Controller
     }
        public function viewPackages(Request $request){
             
-        $packages = Products_Attributes::get();
+        $packages = Product::get();
         $packages = json_decode(json_encode($packages));
 
         // foreach($products as $key => $val){
